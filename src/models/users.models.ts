@@ -69,14 +69,14 @@ User.init({
 {
 sequelize,
 tableName: 'users',
-timeStamps:true,
+timestamps:true,
 hooks:{
-    //  Hook to encrypt the password before to create the user
-    beforeCreate: async (user: User) =>{
-        // Here I statement the code to encrypt (in simple words)
-        const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(user.password,salt);
-    },
+    //  Hook to encrypt the password before to create the user -- I have this function in my service
+    // beforeCreate: async (user: User) =>{
+    //     // Here I statement the code to encrypt (in simple words)
+    //     const salt = await bcrypt.genSalt(10);
+    //     user.password = await bcrypt.hash(user.password,salt);
+    // },
     beforeUpdate: async (user:User) =>{
         if(user.changed('password')){
             const salt = await bcrypt.genSalt(10);
