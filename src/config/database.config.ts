@@ -10,3 +10,6 @@ dialect:"postgres",
 logging:console.log,
 
 })
+
+
+export default sequelize;
