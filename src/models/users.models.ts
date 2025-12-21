@@ -1,7 +1,7 @@
-import sequelize from '../config/database.config.js';
+import sequelize from '../config/database.config';
 import { DataTypes, Optional, Model } from 'sequelize';
 import bcrypt from 'bcryptjs'
-import { timeStamp } from 'node:console';
+
 
 //This is my interface fo my users -- Could exist an user with createdAt and updatedAt in optional status
 // but, never an user with id optional
