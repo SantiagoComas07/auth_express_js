@@ -1,7 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import authRoute from './routes/auth.routes';
+import authRoute from './routes/auth.routes.js';
+import type {Request, Response} from 'express';
 
 dotenv.config();
 const app = express();
@@ -9,9 +10,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req:Request,res:Response)=>{
+    res.send("Hello world");
+})
+
 // This is my auth routes
 app.use('/auth', authRoute);
 
 const port = process.env.PORT || 1000;
 
-app.listen(port, ()=> console.log(`Server runing in http://localhost${port}`))
+app.listen(port, ()=> console.log(`Server runing in http://localhost:${port}`))

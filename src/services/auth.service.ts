@@ -1,8 +1,8 @@
 
-import { IloginDto } from "../DTO/login.dto";
-import { IregisterDto } from "../DTO/register.dto";
-import User from "../models/users.models";
-import bcryptService from './encrypt.service'
+import type { IloginDto } from "../DTO/login.dto.js";
+import type { IregisterDto } from "../DTO/register.dto.js";
+import User from "../models/users.models.js";
+import bcryptService from './encrypt.service.js'
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config()
