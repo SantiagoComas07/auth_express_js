@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import authRoute from './routes/auth.routes.js';
 import type {Request, Response} from 'express';
+import sequelize from './config/database.config.js';
 
 dotenv.config();
 const app = express();
@@ -19,4 +20,13 @@ app.use('/auth', authRoute);
 
 const port = process.env.PORT || 1000;
 
-app.listen(port, ()=> console.log(`Server runing in http://localhost:${port}`))
+(async ()=>{
+    try{
+        await sequelize.sync({alter:true});
+        console.log("Database connected");
+    app.listen(port, ()=> console.log(`Server runing in http://localhost:${port}`))
+
+    }catch(error){
+        console.log("unable to sync database: ", error);
+    }
+})();
