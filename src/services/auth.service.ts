@@ -15,6 +15,7 @@ class AuthService {
    // {username:string, email:string, password:string} This is an example of the parameter that I need
     public async register(data:IregisterDto ){
         // Here I am destructuring the data
+        console.log(data)
         const {username, email, password} = data;
         // Here I use validations to find out information exist
         if(!username || !email || !password){
