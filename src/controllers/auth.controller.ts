@@ -3,9 +3,14 @@ import type {Request, Response} from 'express';
 
 
 
-async  function register(req:Request,res:Response):Promise<void>{
+const register = async(req:Request,res:Response):Promise<void> =>{
+
+    //This validation remember me that the proper format is application/json
+//     console.log('Content-Type:', req.headers['content-type']);
+// console.log('Body:', req.body);
+
     try{
-        console.log(req.body)
+        // console.log(req.body)
         const user = await AuthService.register(req.body);
         res.status(201).json({message:"User creatded sucessfuly", user})
 
@@ -15,7 +20,7 @@ async  function register(req:Request,res:Response):Promise<void>{
 }
 
 
-async function login(req:Request, res:Response):Promise<void>{
+const login = async(req:Request, res:Response):Promise<void> =>{
     try{
         const user = await AuthService.login(req.body);
         res.status(201).json({message:"User logged sucessfuly", user})
