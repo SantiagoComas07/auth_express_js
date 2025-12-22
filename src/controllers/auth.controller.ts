@@ -1,3 +1,4 @@
+import { AppError } from '../errors/customError.js';
 import  AuthService from '../services/auth.service.js';
 import type {Request, Response} from 'express';
 
@@ -15,17 +16,28 @@ const register = async(req:Request,res:Response):Promise<void> =>{
         res.status(201).json({message:"User creatded sucessfuly", user})
 
     }catch(error){
-        console.log(error);
+        console.log(error)
+        }
     }
-}
 
 
-const login = async(req:Request, res:Response):Promise<void> =>{
+
+const login = async(req:Request, res:Response) =>{
     try{
         const user = await AuthService.login(req.body);
-        res.status(201).json({message:"User logged sucessfuly", user})
+            return res.status(200).json({
+      success: true,
+      message: "User logged successfully",
+      user
+    });
     }catch(error){
-        console.log(error)
+            if (error instanceof AppError) {
+                return res.status(error.statusCode).json({
+                    success: false,
+                    message: error.message
+                });
+}
+
     }
 }
 
