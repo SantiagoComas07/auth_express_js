@@ -5,6 +5,7 @@ import User from "../models/users.models.js";
 import bcryptService from './encrypt.service.js'
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { AppError } from "../errors/customError.js";
 dotenv.config()
 
 
@@ -54,19 +55,19 @@ class AuthService {
         const { email, password} = data;
         // Here I use validations to find out information exist
         if( !email || !password){
-            throw new Error("Username, Email and password are required");
+            throw new AppError("Username, Email and password are required", 400);
         }
         // I find out the user in my DB
         const user = await User.findOne({where:{email}})
         // Here I verify if the user exist
         if(!user){
-            throw new Error("The user isn't exist")
+            throw new AppError("The user isn't exist", 404)
         }
         // here I compare the password to login
         const isPasswordValid = await bcryptService.comparePassword(password, user.password);
         //Validate the valid password 
         if(!isPasswordValid){
-            throw new Error("The password is incorrect");
+            throw new AppError("The password is incorrect", 400);
         }
        //Here I use JWT to login for safety
        const token = jwt.sign(
