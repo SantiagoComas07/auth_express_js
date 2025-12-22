@@ -21,14 +21,14 @@ interface IuserCreationAttributes extends Optional<IuserAtributes, 'id'>{}
 
 
 class User extends Model<IuserAtributes, IuserCreationAttributes> implements IuserAtributes{
-    public id!:number;
-    public username!:string;
-    public email!:string;
-    public password!:string;
-    public role!: 'admin' | 'user';
-    public readonly createAt!: Date;
-    public readonly updatedAt!:Date;
-
+    declare id:number;
+    declare username:string;
+    declare email:string;
+    declare password:string;
+    declare role: 'admin' | 'user';
+    declare readonly createAt: Date;
+    declare readonly updatedAt:Date;
+    
     // This is the validation (Simply Method) to make sure that the password is correct
     public async comparePassword(passwordAdded: string):Promise<Boolean>{
         return await bcrypt.compare(passwordAdded, this.password);
