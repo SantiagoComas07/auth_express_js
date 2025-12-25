@@ -1,10 +1,10 @@
 import { AppError } from '../errors/customError.js';
 import  AuthService from '../services/auth.service.js';
-import type {Request, Response} from 'express';
+import type {NextFunction, Request, Response} from 'express';
 
 
 
-const register = async(req:Request,res:Response):Promise<void> =>{
+const register = async(req:Request,res:Response, next:NextFunction):Promise<void> =>{
 
     //This validation remember me that the proper format is application/json
 //     console.log('Content-Type:', req.headers['content-type']);
@@ -17,6 +17,7 @@ const register = async(req:Request,res:Response):Promise<void> =>{
 
     }catch(error){
         console.log(error)
+        next(error); 
         }
     }
 

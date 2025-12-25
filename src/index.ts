@@ -4,6 +4,7 @@ import cors from 'cors';
 import authRoute from './routes/auth.routes.js';
 import type {Request, Response} from 'express';
 import sequelize from './config/database.config.js';
+import { errorHandle } from './middlewares/error.middlewares.js';
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,9 @@ app.get('/', (req:Request,res:Response)=>{
 
 // This is my auth routes
 app.use('/auth', authRoute);
+
+//Middlewares
+app.use(errorHandle);
 
 const port = process.env.PORT || 1000;
 
