@@ -20,18 +20,18 @@ class AuthService {
         const {username, email, password} = data;
         // Here I use validations to find out information exist
         if(!username || !email || !password){
-            throw new Error("Username, Email and password are required");
+            throw new AppError("Username, Email and password are required",400);
         }
 
         // Here I verify that the password have the proper number of caracters
         if(password.length <8 ){
-            throw new Error("There isn't a valid password, the password need 8 characters for safety")
+            throw new AppError("There isn't a valid password, the password need 8 characters for safety", 400)
         }
         // This return a True or False status -- This is a query to DB
         const existEmail = await User.findOne({where:{email}});
         // I validate that the email exits 
         if(existEmail){
-            throw new Error("The email already exists");
+            throw new AppError("The email already exists", 409);
         }
 
         // Now I hashing the password
